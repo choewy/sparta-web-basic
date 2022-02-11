@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+    font-family: 'Jua', sans-serif;
+}
+
+.wrapper {
+    width: 300px;
+    margin: auto;
+}
+
+.login-title {
+    background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    height: 200px;
+    text-align: center;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.login-form > button {
+    display: block;
+    width: 100px;
+    margin: auto;
+}

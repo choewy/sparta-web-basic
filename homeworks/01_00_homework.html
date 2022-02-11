@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
+
+        body {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        h1, h6 {
+            display: inline;
+        }
+
+        h1 {
+            margin: 0 20px 0 0;
+        }
+
+        h6 {
+            font-size: 18px;
+        }
+
+        .wrapper {
+            width: 700px;
+            margin: auto;
+        }
+
+        .item-image {
+            background-size: cover;
+            background-position: center;
+            background-color: #e6e6e6;
+            width: 700px;
+            height: 300px;
+            margin: 20px auto 20px;
+        }
+
+        .item-image > p {
+            font-size: 30px;
+            line-height: 300px;
+            text-align: center;
+            color: #9e9e9e;
+        }
+
+        .title-box {
+            margin: 30px 0 10px;
+        }
+
+        .order-box {
+            width: 400px;
+            margin: auto;
+        }
+
+        .order-box button {
+            width: 100px;
+            display: block;
+            margin: auto;
+        }
+
+    </style>
+
+    <title>제품 상세 페이지 | 토끼의 빨간 망토</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="item-image">
+            <p>상품 이미지</p>
+        </div>
+        <div class="title-box">
+            <h1>토끼의 빨간 망토</h1>
+            <h6>가격 : 9,999,999원 / 1개 (재고 : 99)</h6>
+        </div>
+        <p>이것으로 말할 것 같으면 깊은 바닷속 거북왕의 애완 동물 간 큰 토끼에게서 몰래 빼내온 빨간 망토로써 이것을 걸치게 되면 무한한 자신감을 얻어 생판 처음 접하는 코딩을 스파르타코딩클럽과 함께 할 수 있다는데...</p>
+        <div class="title-box">
+            <h1>주문하기</h1>
+        </div>
+        <div class="order-box">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="name">주문자</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="name">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="size">사이즈</label>
+              </div>
+              <select class="custom-select" id="size">
+                <option selected>선택</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="address">배송지</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="address">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="phone">연락처</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="phone">
+            </div>
+            <button type="button" class="btn btn-info">작성완료</button>
+        </div>
+    </div>
+</body>
+
+</html>
