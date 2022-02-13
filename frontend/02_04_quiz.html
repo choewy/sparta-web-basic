@@ -7,10 +7,7 @@
     <!-- JQuery를 import 합니다 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <style type="text/css">
-        div.question-box {
-            margin: 10px 0 20px 0;
-        }
+    <style>
 
         table {
             border: 1px solid;
@@ -30,31 +27,7 @@
 
     <script>
         const api = 'http://spartacodingclub.shop/sparta_api/seoulbike';
-        function q1() {
-            $.ajax({
-                type: "GET",
-                url: api,
-                data: {},
-                success: (res) => {
-                    const tblBody = $('#names-q1');
-                    tblBody.empty();
-
-                    const {getStationList: {row}} = res;
-
-                    row.forEach(data => {
-                        const {stationName, rackTotCnt, parkingBikeTotCnt} = data;
-
-                        tblBody.append(`<tr>
-                                            <td>${stationName}</td>
-                                            <td>${rackTotCnt}</td>
-                                            <td>${parkingBikeTotCnt}</td>
-                                        </tr>`);
-                    })
-                }
-            });
-        }
-
-        function q2() {
+        const reload = () => {
             $.ajax({
                 type: "GET",
                 url: api,
@@ -76,7 +49,7 @@
                                             <td>${rackTotCnt}</td>
                                             <td>${parkingBikeTotCnt}</td>
                                         </tr>`);
-                    })
+                    });
                 }
             });
         }
@@ -85,16 +58,8 @@
 </head>
 
 <body>
-    <h1>jQuery + Ajax의 조합을 연습하자!</h1>
-
-    <hr />
-
-    <div class="question-box">
-        <h2>2. 서울시 OpenAPI(실시간 따릉기 현황)를 이용하기</h2>
-        <p>모든 위치의 따릉이 현황을 보여주세요</p>
-        <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
-        <button onclick="q1()">불러오기</button>
-        <button onclick="q2()">업데이트</button>
+    <div>
+        <button onclick="reload()">업데이트</button>
         <table>
             <thead>
                 <tr>
