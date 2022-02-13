@@ -49,9 +49,12 @@
 
         function q3_remove() {
             const names = $("#names-q3");
-            names.children().map(i => {
-                names.children()[0].remove();
-            });
+
+            // names.children().map(i => {
+            //     names.children()[0].remove();
+            // });
+
+            names.empty();
         }
 
     </script>
