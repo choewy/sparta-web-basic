@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Ajax는 jQuery를 임포트한 페이지에서만 작동한다-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Ajax Tutorials</title>
+</head>
+<body>
+    <script>
+        const url = "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99";
+        $.ajax({
+            type: "GET",
+            url,
+            data: {},
+            success: (res) => {
+                const {RealtimeCityAir: {row}} = res;
+                console.log(row);
+            }
+        });
+    </script>
+</body>
+</html>
