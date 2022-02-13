@@ -14,6 +14,7 @@ def list_tutorials(new: any) -> None:
 
     print(fruits)
 
+
 def dict_tutorials(key: str, value: any) -> None:
     people = [
         {'name': 'bob', 'age': 20},
@@ -34,3 +35,4 @@ def function_tutorials(num: int, operand: int) -> int:
 
 
 if __name__ == '__main__':
+    print_tutorials()
