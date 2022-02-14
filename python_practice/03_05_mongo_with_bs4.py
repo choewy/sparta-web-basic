@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
+url = "https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200303"
+
 
 class MongoDB:
     def __init__(self) -> None:
@@ -81,8 +83,7 @@ class NaverMovies:
                        "Chrome/73.0.3683.86",
                        "Safari/537.36"]
         self.headers = {'User-Agent': " ".join(self.agents)}
-        self.data = requests.get("https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200303",
-                                 headers=self.headers)
+        self.data = requests.get(url, headers=self.headers)
         self.soup = BeautifulSoup(self.data.text, 'html.parser')
         self.db = db
 
