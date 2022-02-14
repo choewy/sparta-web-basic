@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+url = "https://www.genie.co.kr/chart/top200?ditc=D&ymd=20200403&hh=23&rtm=N&pg=1"
+
 
 class GenieMusics:
     def __init__(self) -> None:
@@ -10,8 +12,7 @@ class GenieMusics:
                        "Chrome/73.0.3683.86",
                        "Safari/537.36"]
         self.headers = {'User-Agent': " ".join(self.agents)}
-        self.data = requests.get("https://www.genie.co.kr/chart/top200?ditc=D&ymd=20200403&hh=23&rtm=N&pg=1",
-                                 headers=self.headers)
+        self.data = requests.get(url, headers=self.headers)
         self.soup = BeautifulSoup(self.data.text, 'html.parser')
 
     def scrap_musics(self) -> None:
