@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
+
+        body {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        h1, h6 {
+            display: inline;
+        }
+
+        h1 {
+            margin: 0 20px 0 0;
+        }
+
+        h6 {
+            font-size: 18px;
+        }
+
+        .wrapper {
+            width: 700px;
+            margin: auto;
+        }
+
+        .item-image {
+            background-color: #e6e6e6;
+            background-size: contain;
+            background-position: center;
+            width: 700px;
+            height: 467px;
+            margin: 20px auto 20px;
+        }
+
+        .item-image > p {
+            font-size: 30px;
+            line-height: 300px;
+            text-align: center;
+            color: #9e9e9e;
+        }
+
+        .title-box {
+            margin: 30px 0 10px;
+        }
+
+        .order-box {
+            width: 400px;
+            margin: auto;
+        }
+
+        .order-box button {
+            width: 100px;
+            display: block;
+            margin: auto;
+        }
+
+        .order-table {
+            width: 100%;
+            border: 1px solid #000;
+        }
+
+        .order-table th,
+        .order-table td {
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        .order-table-box {
+            margin: 0 0 30px;
+        }
+
+    </style>
+
+    <title>나홀로 쇼핑몰</title>
+
+    <script>
+        const loadPage = () => {
+            const image_style = {
+                "background": `url(static/images/item-0.jfif)`,
+                "background-size": "cover",
+                "background-position": "center"
+            }
+            const title = "토끼의 빨간 망토";
+            const description = "이것으로 말할 것 같으면 깊은 바닷속 거북왕의 애완 동물 간 큰 토끼에게서 몰래 빼내온 빨간 망토로써 이것을 걸치게 되면 무한한 자신감을 얻어 생판 처음 접하는 코딩을 스파르타코딩클럽과 함께 할 수 있다는데...";
+            const price = 19000;
+            const sizes = ["S", "M", "L", "XL"];
+
+            $(".item-image").css(image_style);
+            $('#prod-title').text(title);
+            $('#prod-description').text(description);
+            $('#prod-price').text(price.toLocaleString());
+
+            const select = $('#size');
+            select.append(`<option value="" selected>선택</option>`);
+            sizes.forEach(size => {
+                select.append(`<option value="${size}">${size}</option>`);
+            });
+
+            $.ajax({
+                type: "GET",
+                url: 'http://spartacodingclub.shop/sparta_api/rate',
+                data: {},
+                success: (res) => {
+                    const {rate} = res;
+                    $('#prod-trans').text((price / rate).toLocaleString());
+                }
+            });
+        };
+
+        const loadOrders = () => {
+            $.ajax({
+                type: "GET",
+                url: "/orders",
+                data: {},
+                success: (res) => {
+                    const {success, rows, error} = res;
+
+                    if (!success) {
+                        return console.log(error);
+                    }
+
+                    const tblBody = $('#order-table-body');
+
+                    rows.forEach(row => {
+                        const {name, size, address, phone} = row;
+                        const tblRow = `<tr>
+                                            <td>${name}</td>
+                                            <td>${size}</td>
+                                            <td>${address}</td>
+                                            <td>${phone}</td>
+                                        </tr>`;
+                        tblBody.append(tblRow);
+                    });
+                }
+            });
+        };
+
+        const postOrder = () => {
+            const name = $('#name').val();
+            const size = $('#size option:selected').val();
+            const address = $('#address').val();
+            const phone = $('#phone').val();
+
+            const reqPhone = /^01([0|1])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+            if (name === "") {
+                return alert("이름을 입력하세요!");
+            }
+
+            if (size === "") {
+                return alert("사이즈를 선택하세요!");
+            }
+
+            if (address === "") {
+                return alert("주소를 입력하세요!");
+            }
+
+            if (!reqPhone.test(phone)) {
+                return alert("연락처 형식에 맞게 입력하세요!\n010-0000-0000");
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '/order',
+                data: {name, address, size, phone},
+                success: (res) => {
+                    const {success, error} = res;
+
+                    if (!success) {
+                        return console.log(error);
+                    }
+
+                    alert("주문되었습니다!");
+                    document.location.reload();
+                }
+            });
+        };
+
+        $(document).ready(() => {
+            loadPage();
+            loadOrders();
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="item-image" id="item-image"></div>
+        <div class="title-box">
+            <h1 id="prod-title"></h1>
+            <h6>가격 : <span id="prod-price"></span>원</h6>
+            <h6>($ <span id="prod-trans"></span>)</h6>
+        </div>
+        <p id="prod-description"></p>
+        <div class="title-box">
+            <h1>주문하기</h1>
+        </div>
+        <div class="order-box">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="order-name">주문자</span>
+              </div>
+              <input id="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="order-name">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="size">사이즈</label>
+              </div>
+              <select class="custom-select" id="size"></select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="order-address">배송지</span>
+              </div>
+              <input id="address" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="order-address">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="order-phone">연락처</span>
+              </div>
+              <input id="phone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="order-phone">
+            </div>
+            <button type="button" class="btn btn-info" onclick="postOrder()">주문완료</button>
+        </div>
+        <div class="title-box">
+            <h1>주문내역</h1>
+        </div>
+        <div class="order-table-box">
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>사이즈</th>
+                        <th>주소</th>
+                        <th>연락처</th>
+                    </tr>
+                </thead>
+                <tbody id="order-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
