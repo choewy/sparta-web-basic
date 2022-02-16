@@ -42,7 +42,8 @@
                             return console.log(error);
                         }
 
-                        const cards = $("#cards")
+                        const cards = $("#cards");
+                        cards.empty();
                         rows.forEach(row => {
                             const {_id, name, img, recent, url, like} = row;
 
@@ -92,7 +93,8 @@
                         }
 
                         alert("좋아요는 배우들에게 큰 힘이 됩니다!");
-                        document.location.reload();
+                        loadActors();
+                        // document.location.reload();
                     }
                 });
             };
@@ -110,7 +112,8 @@
                         }
 
                         alert("목록에서 삭제되었습니다!");
-                        document.location.reload();
+                        loadActors();
+                        // document.location.reload();
                     }
                 });
             };
